@@ -14,7 +14,7 @@
    <children>
       <VBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="weatherInfoImage" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="weatherInfoImage" pickOnBounds="true" />
             <Text fx:id="weatherInfoText" strokeType="OUTSIDE" strokeWidth="0.0" />
             <ChoiceBox fx:id="stationChoice" />
             <Button mnemonicParsing="false" onAction="#refreshData" text="Refresh Data" />
