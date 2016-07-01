@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="assignment11.InterfaceController">
    <children>
-      <VBox alignment="CENTER" spacing="10.0">
+      <VBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="weatherInfoImage" pickOnBounds="true" preserveRatio="true" />
             <Text fx:id="weatherInfoText" strokeType="OUTSIDE" strokeWidth="0.0" />
