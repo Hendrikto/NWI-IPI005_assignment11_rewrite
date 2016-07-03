@@ -12,17 +12,6 @@ import org.w3c.dom.Element;
  */
 public class WeatherInfo {
 
-    private static final String STATION_NAME_TAG = "stationnaam";
-    private static final String DATE_TAG = "datum";
-    private static final String HUMIDITY_TAG = "luchtvochtigheid";
-    private static final String TEMP_TAG = "temperatuurGC";
-    private static final String WIND_SPEED_TAG = "windsnelheidMS";
-    private static final String WIND_DIRECTION_TAG = "windrichting";
-    private static final String GUSTS_TAG = "windstotenMS";
-    private static final String AIR_PRESSURE_TAG = "luchtdruk";
-    private static final String VISIBILITY_TAG = "zichtmeters";
-    private static final String RAIN_TAG = "regenMMPU";
-    private static final String ICON_URL_TAG = "icoonactueel";
     private static final String DATE_FORMAT_XML = "MM/dd/yyyy HH:mm:ss";
 
     private final Date date;
@@ -51,17 +40,17 @@ public class WeatherInfo {
      */
     public WeatherInfo(Element station) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_XML);
-        date = dateFormat.parse(getContent(station, DATE_TAG));
-        stationName = getContent(station, STATION_NAME_TAG);
-        humidity = getContent(station, HUMIDITY_TAG);
-        temp = getContent(station, TEMP_TAG);
-        windSpeed = getContent(station, WIND_SPEED_TAG);
-        gusts = getContent(station, GUSTS_TAG);
-        airPressure = getContent(station, AIR_PRESSURE_TAG);
-        windDirection = getContent(station, WIND_DIRECTION_TAG);
-        visibility = getContent(station, VISIBILITY_TAG);
-        rain = getContent(station, RAIN_TAG);
-        iconURL = getContent(station, ICON_URL_TAG);
+        date = dateFormat.parse(getContent(station, BuienradarParser.XmlTag.Date.name));
+        stationName = getContent(station, BuienradarParser.XmlTag.StationName.name);
+        humidity = getContent(station, BuienradarParser.XmlTag.Humidity.name);
+        temp = getContent(station, BuienradarParser.XmlTag.Temperature.name);
+        windSpeed = getContent(station, BuienradarParser.XmlTag.WindSpeed.name);
+        gusts = getContent(station, BuienradarParser.XmlTag.Gusts.name);
+        airPressure = getContent(station, BuienradarParser.XmlTag.AirPressure.name);
+        windDirection = getContent(station, BuienradarParser.XmlTag.WindDirection.name);
+        visibility = getContent(station, BuienradarParser.XmlTag.Visibility.name);
+        rain = getContent(station, BuienradarParser.XmlTag.Rain.name);
+        iconURL = getContent(station, BuienradarParser.XmlTag.IconUrl.name);
     }
 
     /**

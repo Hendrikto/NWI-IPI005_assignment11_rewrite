@@ -22,7 +22,6 @@ import org.xml.sax.SAXException;
 public final class BuienradarParser implements WeatherInfoProvider {
 
     private static final String API_ENDPOINT = "http://xml.buienradar.nl/";
-    private static final String STATION_TAG = "weerstation";
 
     private final ListProperty<WeatherInfo> weatherInfo;
     private DocumentBuilder builder;
@@ -47,7 +46,7 @@ public final class BuienradarParser implements WeatherInfoProvider {
         try {
             weatherInfo.clear();
             Document doc = builder.parse(new URL(API_ENDPOINT).openStream());
-            NodeList stations = doc.getElementsByTagName(STATION_TAG);
+            NodeList stations = doc.getElementsByTagName(XmlTag.Station.name);
             for (int i = 0; i < stations.getLength(); i++) {
                 weatherInfo.add(new WeatherInfo((Element) stations.item(i)));
             }
@@ -55,6 +54,31 @@ public final class BuienradarParser implements WeatherInfoProvider {
             throw new RuntimeException(ex);
         }
         return this;
+    }
+
+    /**
+     * An enumeration of Buienradar XML Tags
+     */
+    enum XmlTag {
+        Station("weerstation"),
+        StationName("stationnaam"),
+        Date("datum"),
+        Humidity("luchtvochtigheid"),
+        Temperature("temperatuurGC"),
+        WindSpeed("windsnelheidMS"),
+        WindDirection("windrichting"),
+        Gusts("windstotenMS"),
+        AirPressure("luchtdruk"),
+        Visibility("zichtmeters"),
+        Rain("regenMMPU"),
+        IconUrl("icoonactueel");
+
+        public final String name;
+
+        private XmlTag(String name) {
+            this.name = name;
+        }
+
     }
 
 }
