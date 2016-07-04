@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -45,8 +44,9 @@ public final class BuienradarParser implements WeatherInfoProvider {
     public void refresh() {
         try {
             weatherInfo.clear();
-            Document doc = builder.parse(new URL(API_ENDPOINT).openStream());
-            NodeList stations = doc.getElementsByTagName(XmlTag.Station.name);
+            NodeList stations = builder
+                    .parse(new URL(API_ENDPOINT).openStream())
+                    .getElementsByTagName(XmlTag.Station.name);
             for (int i = 0; i < stations.getLength(); i++) {
                 weatherInfo.add(new WeatherInfo((Element) stations.item(i)));
             }
