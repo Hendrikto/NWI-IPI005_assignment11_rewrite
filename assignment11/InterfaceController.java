@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import model.BuienradarParser;
 import model.WeatherInfo;
 import model.WeatherInfoProvider;
+import model.WeatherInfoUpdater;
 
 /**
  * FXML Controller class.
@@ -42,9 +43,7 @@ public class InterfaceController implements Initializable {
 
     @FXML
     private void refreshData() {
-        int selected = stationChoice.getSelectionModel().getSelectedIndex();
-        parser.refresh();
-        stationChoice.getSelectionModel().select(selected);
+        new Thread(new WeatherInfoUpdater(parser, stationChoice.getSelectionModel())).start();
     }
 
     private void refreshUI() {
