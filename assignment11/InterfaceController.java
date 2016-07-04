@@ -21,9 +21,9 @@ public class InterfaceController implements Initializable {
 
     private WeatherInfoProvider parser;
 
-    @FXML protected Text weatherInfoText;
-    @FXML protected ImageView weatherInfoImage;
-    @FXML protected ChoiceBox<WeatherInfo> stationChoice;
+    @FXML private Text weatherInfoText;
+    @FXML private ImageView weatherInfoImage;
+    @FXML private ChoiceBox<WeatherInfo> stationChoice;
 
     /**
      * Initialize the controller class.
