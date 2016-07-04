@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * Hold information about the weather at a station.
@@ -51,6 +52,10 @@ public class WeatherInfo {
         visibility = getContent(station, BuienradarParser.XmlTag.Visibility.name);
         rain = getContent(station, BuienradarParser.XmlTag.Rain.name);
         iconURL = getContent(station, BuienradarParser.XmlTag.IconUrl.name);
+    }
+
+    public WeatherInfo(Node station) throws ParseException {
+        this((Element) station);
     }
 
     /**
