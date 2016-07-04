@@ -11,6 +11,6 @@ public interface WeatherInfoProvider {
 
     public ListProperty<WeatherInfo> weatherInfoProperty();
 
-    public WeatherInfoProvider refresh();
+    public void refresh();
 
 }

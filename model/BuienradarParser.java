@@ -42,7 +42,7 @@ public final class BuienradarParser implements WeatherInfoProvider {
     }
 
     @Override
-    public WeatherInfoProvider refresh() {
+    public void refresh() {
         try {
             weatherInfo.clear();
             Document doc = builder.parse(new URL(API_ENDPOINT).openStream());
@@ -53,7 +53,6 @@ public final class BuienradarParser implements WeatherInfoProvider {
         } catch (IOException | SAXException | ParseException ex) {
             throw new RuntimeException(ex);
         }
-        return this;
     }
 
     /**
