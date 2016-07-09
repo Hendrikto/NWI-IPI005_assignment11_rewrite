@@ -19,6 +19,7 @@ public class WeatherInfoUpdater extends Task<Void> {
 
     @Override
     protected Void call() throws Exception {
+        provider.refresh();
         return null;
     }
 
@@ -29,11 +30,11 @@ public class WeatherInfoUpdater extends Task<Void> {
 
     @Override
     protected void running() {
-        provider.refresh();
     }
 
     @Override
     protected void succeeded() {
+        provider.commit();
         selection.select(selected);
 
     }
