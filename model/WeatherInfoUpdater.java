@@ -36,7 +36,6 @@ public class WeatherInfoUpdater extends Task<Void> {
     protected void succeeded() {
         provider.commit();
         selection.select(selected);
-
     }
 
 }
