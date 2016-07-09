@@ -13,4 +13,6 @@ public interface WeatherInfoProvider {
 
     public void refresh();
 
+    public void commit();
+
 }

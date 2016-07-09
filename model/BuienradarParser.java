@@ -6,6 +6,7 @@ import java.text.ParseException;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,14 +22,15 @@ public final class BuienradarParser implements WeatherInfoProvider {
 
     private static final String API_ENDPOINT = "http://xml.buienradar.nl/";
 
-    private final ListProperty<WeatherInfo> weatherInfo;
+    private final ListProperty<WeatherInfo> weatherInfoProperty;
+    private ObservableList<WeatherInfo> weatherInfo;
     private DocumentBuilder builder;
 
     public BuienradarParser() {
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            weatherInfo = new SimpleListProperty<>(FXCollections.observableArrayList());
             refresh();
+            weatherInfoProperty = new SimpleListProperty<>(weatherInfo);
         } catch (ParserConfigurationException ex) {
             throw new RuntimeException(ex);
         }
@@ -36,13 +38,13 @@ public final class BuienradarParser implements WeatherInfoProvider {
 
     @Override
     public ListProperty<WeatherInfo> weatherInfoProperty() {
-        return weatherInfo;
+        return weatherInfoProperty;
     }
 
     @Override
     public void refresh() {
         try {
-            weatherInfo.clear();
+            weatherInfo = FXCollections.observableArrayList();
             NodeList stations = builder
                     .parse(new URL(API_ENDPOINT).openStream())
                     .getElementsByTagName(XmlTag.Station.name);
@@ -52,6 +54,11 @@ public final class BuienradarParser implements WeatherInfoProvider {
         } catch (IOException | SAXException | ParseException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    @Override
+    public void commit() {
+        weatherInfoProperty.set(weatherInfo);
     }
 
     /**
